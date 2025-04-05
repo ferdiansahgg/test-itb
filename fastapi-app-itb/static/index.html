@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Message of the Day</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f6f8fa;
+      margin: 0;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #333;
+    }
+    .motd {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Message of the Day</h1>
+    <p class="motd" id="motd">Loading...</p>
+  </div>
+
+  <script>
+    async function fetchMOTD() {
+      try {
+        const response = await fetch('/motd');
+        const data = await response.json();
+        document.getElementById('motd').innerText = data.motd || "No message available.";
+      } catch (error) {
+        document.getElementById('motd').innerText = "Failed to load message.";
+        console.error(error);
+      }
+    }
+
+    fetchMOTD();
+  </script>
+</body>
+</html>

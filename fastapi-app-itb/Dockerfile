@@ -1,11 +1,13 @@
-# Gunakan image python yang ringan
 FROM python:3.11-slim
 
 # Buat workdir di dalam container
 WORKDIR /app
 
 # Copy semua file dari project lokal ke container
-COPY . .
+COPY . /app
+
+# Pastikan folder app sebagai package
+RUN touch /app/app/__init__.py
 
 # Install dependensi
 RUN pip install --no-cache-dir -r requirements.txt
